@@ -8,8 +8,7 @@ import "./App.css";
 
 function App() {
   const signout = async () => {
-    const signedin = isSignedIn();
-    if (signedin) {
+    if (isSignedIn()) {
       await signOutOfFirebase();
       signOutOfLinkedin(); // opens window to logout linkedin user - not good UX, but alternative not found.
       alert("Signed out.");
