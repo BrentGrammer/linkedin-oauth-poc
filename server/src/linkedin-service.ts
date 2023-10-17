@@ -1,12 +1,8 @@
 import axios from "axios";
 
-const LINKEDIN_BASE_URL = "https://api.linkedin.com/v2";
-const authorizedEndpoint = "userinfo";
-
 const REDIRECT_URL = process.env.REDIRECT_URI;
 const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
 const CLIENT_SECRET = process.env.LINKEDIN_SECRET;
-const LINKEDIN_URL = "https://www.linkedin.com/oauth/v2/accessToken";
 
 /**
  * { token_type, access_token, id_token, expires_in } = token response;
@@ -20,8 +16,9 @@ export const getAccessToken = async (code) => {
     redirect_uri: REDIRECT_URL,
   };
 
+  const ACCESS_TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken";
   const res = await axios.post(
-    LINKEDIN_URL,
+    ACCESS_TOKEN_URL,
     {},
     {
       params,
@@ -32,9 +29,15 @@ export const getAccessToken = async (code) => {
 };
 
 export const getLinkedinUser = async ({ token_type, access_token }) => {
-  const res = await axios.get(`${LINKEDIN_BASE_URL}/${authorizedEndpoint}`, {
-    headers: { Authorization: `${token_type} ${access_token}` },
-  });
+  const LINKEDIN_BASE_URL = "https://api.linkedin.com/v2";
+  const authorizedUserInfoEndpoint = "userinfo";
+
+  const res = await axios.get(
+    `${LINKEDIN_BASE_URL}/${authorizedUserInfoEndpoint}`,
+    {
+      headers: { Authorization: `${token_type} ${access_token}` },
+    }
+  );
 
   const {
     // email_verified,
