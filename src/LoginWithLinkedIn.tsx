@@ -3,7 +3,7 @@ import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 import { getSigninToken, signinToFirebase } from "./auth-service";
 
 function LoginWithLinkedIn() {
-  const REDIRECT_URL = `${window.location.origin}/login`; // needs to match what is entered into linkedin developer authorized urls (under the auth menu)
+  const REDIRECT_URL = `${window.location.origin}/login`; // needs to match what is entered into linkedin developer authorized urls (under the auth menu at https://www.linkedin.com/developers/apps)
   const CLIENT_ID = import.meta.env.VITE_LINKEDIN_CLIENT_ID;
 
   const { linkedInLogin } = useLinkedIn({

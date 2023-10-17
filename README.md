@@ -19,6 +19,7 @@ This is a repo to test out signing in with linkedin from a React app and then in
 ## Starting the app
 
 - requires firebase project if hooking up to firebase, update the config/firebase.ts params with your project details
+- requires a Linkedin developer app setup: https://www.linkedin.com/developers/apps
 - Populate .env files for the frontend and server (in /server) using your Linkedin/Firebase credentials:
 
 ```
