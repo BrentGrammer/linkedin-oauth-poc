@@ -29,7 +29,7 @@ app.get("/linkedin", (req, res) => {
     client_secret: CLIENT_SECRET,
     redirect_uri: REDIRECT_URL,
   };
-  // not working - get 400 bad request
+
   axios
     .post(
       LINKEDIN_URL,
@@ -63,6 +63,8 @@ app.get("/linkedin", (req, res) => {
             picture,
           } = linkedinData.data;
           // can use these to create and store a user in firebase
+
+          // custom token - service account?
           console.log({ sub, email, given_name, family_name, picture });
         })
         .catch((e) => {
