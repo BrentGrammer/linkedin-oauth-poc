@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "ts-node": {
+    "esm": true,
+    "compiler": "typescript"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
