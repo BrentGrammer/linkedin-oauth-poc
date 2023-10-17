@@ -3,7 +3,6 @@ import axios from "axios";
 
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
@@ -51,13 +50,6 @@ app.get("/linkedin", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log("Server connected to database and listening on PORT:", PORT);
-    });
-  })
-  .catch((err) => {
-    console.log("MONGO CONNECTION ERROR: ", err);
-  });
+app.listen(PORT, () => {
+  console.log("Server connected to database and listening on PORT:", PORT);
+});
