@@ -44,6 +44,31 @@ app.get("/linkedin", (req, res) => {
       const { token_type, access_token, id_token, expires_in } = data;
       console.log({ token_type, access_token, id_token, expires_in });
 
+      const LINKEDIN_BASE_URL = "https://api.linkedin.com/v2";
+      const authorizedEndpoint = "userinfo";
+
+      axios
+        .get(`${LINKEDIN_BASE_URL}/${authorizedEndpoint}`, {
+          headers: { Authorization: `${token_type} ${access_token}` },
+        })
+        .then((linkedinData) => {
+          const {
+            // email_verified,
+            // name,
+            // locale,
+            sub,
+            given_name,
+            family_name,
+            email,
+            picture,
+          } = linkedinData.data;
+          // can use these to create and store a user in firebase
+          console.log({ sub, email, given_name, family_name, picture });
+        })
+        .catch((e) => {
+          console.error("Error getting me profile: ", e);
+        });
+
       res.json("Success - access token recieved");
     })
     .catch((e) => {
