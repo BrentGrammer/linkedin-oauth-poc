@@ -3,13 +3,13 @@ import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 
 function LoginWithLinkedIn() {
-  const REDIRECT_URL = encodeURIComponent(`${window.location.origin}/login`);
+  const REDIRECT_URL = `${window.location.origin}/login`;
   const CLIENT_ID = import.meta.env.VITE_LINKEDIN_CLIENT_ID;
   const CLIENT_SECRET = import.meta.env.VITE_LINKEDIN_SECRET;
 
   const { linkedInLogin } = useLinkedIn({
     clientId: CLIENT_ID,
-    redirectUri: REDIRECT_URL,
+    redirectUri: encodeURIComponent(REDIRECT_URL),
     onSuccess: (code) => {
       console.log({ code });
 
