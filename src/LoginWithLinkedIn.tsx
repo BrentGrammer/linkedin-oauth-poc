@@ -1,6 +1,6 @@
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
-import { getSigninToken, signinToFirebase } from "./signin-service";
+import { getSigninToken, signinToFirebase } from "./auth-service";
 
 function LoginWithLinkedIn() {
   const REDIRECT_URL = `${window.location.origin}/login`;

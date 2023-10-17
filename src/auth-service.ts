@@ -20,3 +20,13 @@ export const signinToFirebase = async (customToken: string) => {
   const user = userCredential.user;
   return user;
 };
+
+export const signOutOfFirebase = async () => {
+  const auth = getAuth();
+  await auth.signOut();
+};
+
+export const isSignedIn = (): boolean => {
+  const auth = getAuth();
+  return !!auth.currentUser;
+}
