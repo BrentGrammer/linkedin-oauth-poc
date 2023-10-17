@@ -1,4 +1,6 @@
-# Sign in with linkedin testing
+# Sign in with linkedin POC
+
+This is a repo to test out signing in with linkedin from a React app and then integrating with Firebase. WIP.
 
 - https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin%2Fcontext&tabs=cURL1#step-2-request-an-authorization-code
 - https://www.feathery.io/blog/linkedin-oauth
