@@ -40,7 +40,10 @@ app.get("/linkedin", (req, res) => {
       }
     )
     .then((response) => {
-      console.log({ response });
+      const data = response.data;
+      const { token_type, access_token, id_token, expires_in } = data;
+      console.log({ token_type, access_token, id_token, expires_in });
+
       res.json("Success - access token recieved");
     })
     .catch((e) => {
