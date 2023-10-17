@@ -8,10 +8,11 @@ function LoginWithLinkedIn() {
     clientId: import.meta.env.VITE_LINKEDIN_CLIENT_ID,
     redirectUri: REDIRECT_URL,
     onSuccess: (code) => {
-      console.log(code);
+      console.log({ code });
     },
     onError: (error) => {
-      console.log(error);
+      // NOTE: error will come up for user closed pop up - probably can ignore this as popup should close after signin.
+      console.log({ error });
     },
     scope: "email openid profile",
   });
