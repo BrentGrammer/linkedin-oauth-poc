@@ -10,16 +10,11 @@ function LoginWithLinkedIn() {
     clientId: CLIENT_ID,
     redirectUri: encodeURIComponent(REDIRECT_URL),
     onSuccess: (code) => {
-      console.log({ code });
-
-      // call backend to get access token
+      // call backend to get access token and make api call to linkedin to get user info
       axios
         .get("http://localhost:5000/linkedin", { params: { code } })
         .then((res) => console.log({ res }))
         .catch((e) => console.error(e));
-
-      // Now that we have the code, need to use it to log in with Firebase somehow
-      // get user info to store in firebase and sign in with custom token?
     },
     onError: (error) => {
       // NOTE: error will come up for user closed pop up - probably can ignore this as popup should close after signin.
