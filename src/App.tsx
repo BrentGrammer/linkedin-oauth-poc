@@ -1,5 +1,9 @@
 import LoginWithLinkedIn from "./LoginWithLinkedIn";
-import { isSignedIn, signOutOfFirebase } from "./auth-service";
+import {
+  isSignedIn,
+  signOutOfFirebase,
+  signOutOfLinkedin,
+} from "./auth-service";
 import "./App.css";
 
 function App() {
@@ -7,6 +11,7 @@ function App() {
     const signedin = isSignedIn();
     if (signedin) {
       await signOutOfFirebase();
+      signOutOfLinkedin(); // opens window to logout linkedin user - not good UX, but alternative not found.
       alert("Signed out.");
     } else {
       alert("User is already signed out.");

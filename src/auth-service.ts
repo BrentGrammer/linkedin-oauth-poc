@@ -26,7 +26,30 @@ export const signOutOfFirebase = async () => {
   await auth.signOut();
 };
 
+/**
+ * Taken from https://github.com/nvh95/react-linkedin-login-oauth2/issues/29
+ * This should sign the user out of linkedin. Opens a window to go to logout url and closes it - not the best UX, but an option if needed.
+ * Linkedin does not offer a way to signout otherwise
+ */
+export const signOutOfLinkedin = () => {
+  const logoutLinkedin = (url: string) => {
+    // Invisible window popup
+    const win = window.open(
+      url,
+      "_blank",
+      "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+    );
+
+    if (!win) throw new Error("window is null");
+
+    setTimeout(() => {
+      win.close();
+    }, 3000);
+  };
+  logoutLinkedin("https://linkedin.com/m/logout"); //This will log out user from linked in profile, but pops up a window and closes it - bad ux
+};
+
 export const isSignedIn = (): boolean => {
   const auth = getAuth();
   return !!auth.currentUser;
-}
+};
