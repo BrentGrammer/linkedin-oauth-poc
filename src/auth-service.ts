@@ -16,7 +16,7 @@ export const getSigninToken = async (code: string): Promise<string> => {
 /**
  * Signs into Firebase using a custom token - will create a user if they don't already exist in Firebase.
  * @param customToken a firebase custom token generated on the backend and sent back to client - we pass it in here
- * @returns the new Firebase user or existing user based on the custom Token for them generated for the session.
+ * @returns the new Firebase user or existing user
  */
 export const signinToFirebase = async (customToken: string) => {
   const auth = getAuth();
