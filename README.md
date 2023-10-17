@@ -72,3 +72,9 @@ Just like with explicitly specified service account IDs, auto-discoverd service 
 ### Verifying Tokens:
 
 - On the backend can decode and verify custom tokens: https://firebase.google.com/docs/auth/admin/verify-id-tokens
+
+### Signing out
+- Should be able to sign out of firebase no problem, but Linkedin might have issues: see https://community.auth0.com/t/i-cant-really-logout-of-my-linkedin-account-via-auth0/16941/5
+- Linkedin does not provide a way of requesting a logout and send the user back to the requestor (i.e. your application).
+- Is possible to redirect to logout url for linkedin, but not a good user experience: https://stackoverflow.com/questions/58968159/how-do-i-clear-a-session-or-logout-using-the-linkedin-rest-api
+- BEWARE using  https://www.linkedin.com/oauth/v2/revoke - this will delete the app from the developers console if the owner runs this command! https://stackoverflow.com/questions/54315667/linkedin-oauth2-0-invalidate-session-force-re-authorization
