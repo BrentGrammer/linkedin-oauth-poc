@@ -67,7 +67,8 @@ Just like with explicitly specified service account IDs, auto-discoverd service 
 ### Creating tokens:
 
 - The Firebase Admin SDK has a built-in method for creating custom tokens. At a minimum, you need to provide a uid, which can be any string but should uniquely identify the user or device you are authenticating. These tokens expire after one hour.
-- After you create a custom token, you should send it to your client app. The client app authenticates with the custom token by calling signInWithCustomToken()
+- After you create a custom token, you should send it to your client app. The client app authenticates with the custom token by calling signInWithCustomToken() from firebase/auth package
+- We can then listen for auth state changes after calling this (as it's set up usually in the app to auto login/logout firebase user)
 
 ### Verifying Tokens:
 
