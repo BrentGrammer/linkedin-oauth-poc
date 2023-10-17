@@ -24,7 +24,6 @@ This is a repo to test out signing in with linkedin from a React app and then in
 # frontend (.env goes in root folder)
 VITE_FIREBASE_API_KEY=yourkey
 VITE_LINKEDIN_CLIENT_ID=clientid-from-linkedin-developers-app
-VITE_LINKEDIN_SECRET=secret-from-linkedin-developers-app
 ```
 
 ```
