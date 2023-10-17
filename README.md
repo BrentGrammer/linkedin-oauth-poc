@@ -34,7 +34,8 @@ LINKEDIN_SECRET=your-secret
 REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
 ```
 
-- Install dependencies: `npm i`
+- Install frontend dependencies: `npm i`
+- Install server dependencies: `cd server` `npm i`
 - Start the frontend: `npm start`
 - Start the server: `cd server`
   - `npm start`
