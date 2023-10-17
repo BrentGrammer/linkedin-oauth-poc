@@ -22,6 +22,8 @@ app.get("/linkedin", async (req, res) => {
     const linkedInUser = await getLinkedinUser({ token_type, access_token });
 
     console.log({ linkedInUser });
+    // now that we have linkedin user info and access, we need to sign in with Firebase and sync somehow
+    // possible to use a custom Firebase token with service account json credentials?
     res.status(200).json({ message: "Success" });
   } catch (e) {
     console.error(e);

@@ -2,11 +2,7 @@ import LoginWithLinkedIn from "./LoginWithLinkedIn";
 import "./App.css";
 
 function App() {
-  return (
-    <div>
-      <LoginWithLinkedIn />
-    </div>
-  );
+  return <LoginWithLinkedIn />;
 }
 
 export default App;
