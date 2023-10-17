@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+import { createFirebaseCustomToken } from "./firebase-service";
 import { getAccessToken, getLinkedinUser } from "./linkedin-service";
 
 const app = express();
@@ -24,7 +25,8 @@ app.get("/linkedin", async (req, res) => {
     console.log({ linkedInUser });
     // now that we have linkedin user info and access, we need to sign in with Firebase and sync somehow
     // possible to use a custom Firebase token with service account json credentials?
-    res.status(200).json({ message: "Success" });
+    const customToken = await createFirebaseCustomToken(linkedInUser.sub);
+    res.status(200).json({ message: "Success", token: customToken });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Error /linkedin" });

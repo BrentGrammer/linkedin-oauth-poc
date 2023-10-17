@@ -39,3 +39,21 @@ REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
 - Start the frontend: `npm start`
 - Start the server: `cd server`
   - `npm start`
+
+## TODO: Firebase integration
+- Importing users without passwords? https://firebase.google.com/docs/auth/admin/import-users#import_users_without_passwords
+- Custom auth with custom tokens: https://firebase.google.com/docs/auth/web/custom-auth
+  - You can create a custom token with the Firebase Admin SDK,
+  - If we are running in a google cloud function or managed env, we don't need service account: "credentials lookup is fully automated in Google environments, with no need to supply environment variables or other configuration, this way of initializing the SDK is strongly recommended for applications running in Google environments such as Cloud Run, App Engine, and Cloud Functions."
+- [see docs](https://firebase.google.com/docs/auth/admin/create-custom-tokens) If your code is deployed in the App Engine standard environment for Java, Python or Go, the Admin SDK can use the App Identity service present in that environment to sign custom tokens. The App Identity service signs data using a service account provisioned for your app by Google App Engine.
+
+If your code is deployed in some other managed environment (e.g. Google Cloud Functions, Google Compute Engine), the Firebase Admin SDK can auto-discover a service account ID string from the local metadata server. The discovered service account ID is then used in conjunction with the IAM service to sign tokens remotely.
+
+To make use of these signing methods, initialize the SDK with Google Application Default credentials and do not specify a service account ID string
+
+To test the same code locally, download a service account JSON file and set the GOOGLE_APPLICATION_CREDENTIALS environment variable to point to it.
+
+Just like with explicitly specified service account IDs, auto-discoverd service account IDs must have the iam.serviceAccounts.signBlob permission for the custom token creation to work. You may have to use the IAM and admin section of the Google Cloud Console to grant the default service accounts the necessary permissions. See the troubleshooting section below for more details.
+
+### Creating tokens:
+- The Firebase Admin SDK has a built-in method for creating custom tokens. At a minimum, you need to provide a uid, which can be any string but should uniquely identify the user or device you are authenticating. These tokens expire after one hour.
