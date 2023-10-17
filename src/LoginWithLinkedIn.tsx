@@ -14,9 +14,13 @@ function LoginWithLinkedIn() {
         // call backend to get access token and make api call to linkedin to get user info
         const token = await getSigninToken(code);
         const res = await signinToFirebase(token);
-        console.log({ res });
+        // we'll need to set email at some point for the firebase user using the linkedin email
+        alert(
+          `Signed into Firebase for user uid ${res.uid} with email ${res.email}`
+        );
       } catch (e) {
         console.error("Error signing in: ", e);
+        alert('There was an error signing in.')
       }
     },
     onError: (error) => {
