@@ -41,7 +41,7 @@ REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
 - Start the server: `cd server`
   - `npm start`
 
-## TODO: Firebase integration
+## Firebase integration
 
 - Importing users without passwords? https://firebase.google.com/docs/auth/admin/import-users#import_users_without_passwords
 - Custom auth with custom tokens: https://firebase.google.com/docs/auth/web/custom-auth
