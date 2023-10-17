@@ -2,7 +2,7 @@ import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 
 function LoginWithLinkedIn() {
-  const REDIRECT_URL = encodeURIComponent("http://localhost:5173");
+  const REDIRECT_URL = encodeURIComponent(`${window.location.origin}/linkedin`);
 
   const { linkedInLogin } = useLinkedIn({
     clientId: import.meta.env.VITE_LINKEDIN_CLIENT_ID,
