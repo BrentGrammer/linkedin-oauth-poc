@@ -17,6 +17,7 @@ This is a repo to test out signing in with linkedin from a React app and then in
 - Need to get access token from a server, not a browser to get around this.
 
 ## Starting the app
+
 - requires firebase project if hooking up to firebase, update the config/firebase.ts params with your project details
 - Populate .env files for the frontend and server (in /server) using your Linkedin/Firebase credentials:
 
@@ -41,6 +42,7 @@ REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
   - `npm start`
 
 ## TODO: Firebase integration
+
 - Importing users without passwords? https://firebase.google.com/docs/auth/admin/import-users#import_users_without_passwords
 - Custom auth with custom tokens: https://firebase.google.com/docs/auth/web/custom-auth
   - You can create a custom token with the Firebase Admin SDK,
@@ -55,5 +57,17 @@ To test the same code locally, download a service account JSON file and set the 
 
 Just like with explicitly specified service account IDs, auto-discoverd service account IDs must have the iam.serviceAccounts.signBlob permission for the custom token creation to work. You may have to use the IAM and admin section of the Google Cloud Console to grant the default service accounts the necessary permissions. See the troubleshooting section below for more details.
 
+### Creating a Service Account credential:
+
+- Go to firebase console and your project
+- Project Settings > Service accounts tab > Generate new private key button
+- This will download a new service account json file, copy this to your project and add it to .gitignore so it is not committed to source control
+
 ### Creating tokens:
+
 - The Firebase Admin SDK has a built-in method for creating custom tokens. At a minimum, you need to provide a uid, which can be any string but should uniquely identify the user or device you are authenticating. These tokens expire after one hour.
+- After you create a custom token, you should send it to your client app. The client app authenticates with the custom token by calling signInWithCustomToken()
+
+### Verifying Tokens:
+
+- On the backend can decode and verify custom tokens: https://firebase.google.com/docs/auth/admin/verify-id-tokens

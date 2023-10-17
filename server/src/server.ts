@@ -10,9 +10,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/linkedin", async (req, res) => {
+app.post("/linkedin", async (req, res) => {
   try {
-    const code = req.query.code;
+    const code = req.body.code;
 
     if (!code) {
       return res.json({ status: 400, message: "Missing code." });
@@ -24,9 +24,9 @@ app.get("/linkedin", async (req, res) => {
 
     console.log({ linkedInUser });
     // now that we have linkedin user info and access, we need to sign in with Firebase and sync somehow
-    // possible to use a custom Firebase token with service account json credentials?
+    // use a custom Firebase token with service account json credentials and send custom token to client to sign into firebase with it
     const customToken = await createFirebaseCustomToken(linkedInUser.sub);
-    res.status(200).json({ message: "Success", token: customToken });
+    res.status(200).send(customToken);
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Error /linkedin" });

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
+import { getSigninToken, signinToFirebase } from "./signin-service";
 
 function LoginWithLinkedIn() {
   const REDIRECT_URL = `${window.location.origin}/login`;
@@ -9,12 +9,15 @@ function LoginWithLinkedIn() {
   const { linkedInLogin } = useLinkedIn({
     clientId: CLIENT_ID,
     redirectUri: encodeURIComponent(REDIRECT_URL),
-    onSuccess: (code) => {
-      // call backend to get access token and make api call to linkedin to get user info
-      axios
-        .get("http://localhost:5000/linkedin", { params: { code } })
-        .then((res) => console.log({ res }))
-        .catch((e) => console.error(e));
+    onSuccess: async (code) => {
+      try {
+        // call backend to get access token and make api call to linkedin to get user info
+        const token = await getSigninToken(code);
+        const res = await signinToFirebase(token);
+        console.log({ res });
+      } catch (e) {
+        console.error("Error signing in: ", e);
+      }
     },
     onError: (error) => {
       // NOTE: error will come up for user closed pop up - probably can ignore this as popup should close after signin.
