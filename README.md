@@ -30,6 +30,7 @@ VITE_LINKEDIN_CLIENT_ID=clientid-from-linkedin-developers-app
 ```
 # server (place .env in /server folder)
 FIREBASE_API_KEY=your-api-key
+FIREBASE_PROJECT_ID=your-proj-id
 LINKEDIN_CLIENT_ID=your-client-id
 LINKEDIN_SECRET=your-secret
 REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
