@@ -37,21 +37,18 @@ export const signOutOfFirebase = async () => {
  * Linkedin does not offer a way to signout otherwise
  */
 export const signOutOfLinkedin = () => {
-  const logoutLinkedin = (url: string) => {
-    // Invisible window popup
-    const win = window.open(
-      url,
-      "_blank",
-      "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
-    );
+  //This will log out user from linked in profile, but pops up a window and closes it - bad ux
+  const win = window.open(
+    "https://linkedin.com/m/logout",
+    "_blank",
+    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+  );
 
-    if (!win) throw new Error("window is null");
+  if (!win) throw new Error("window is null");
 
-    setTimeout(() => {
-      win.close();
-    }, 3000);
-  };
-  logoutLinkedin("https://linkedin.com/m/logout"); //This will log out user from linked in profile, but pops up a window and closes it - bad ux
+  setTimeout(() => {
+    win.close();
+  }, 3000);
 };
 
 export const isSignedIn = (): boolean => {
