@@ -8,9 +8,26 @@ import {
 import "./App.css";
 import { useState } from "react";
 import { apiClientWithAuth } from "./api";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React from "react";
 
 function App() {
   const [protectedResponse, setProtectedResponse] = useState("");
+
+  React.useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user: unknown) => {
+      if (user) {
+        try {
+          console.log({ user });
+        } catch (e) {
+          console.error("User auth state change error. ", e);
+        }
+      } else {
+        console.log("No user in auth state");
+      }
+    });
+  }, []);
 
   const signout = async () => {
     if (isSignedIn()) {
