@@ -13,11 +13,11 @@ function LoginWithLinkedIn() {
       try {
         // call backend to get access token and make api call to linkedin to get user info
         const firebaseCustomToken = await getSigninToken(code); // from our server where we create the firebase token.
-        const res = await signinToFirebase(firebaseCustomToken);
+        const user = await signinToFirebase(firebaseCustomToken);
         // we'll need to set email at some point for the firebase user using the linkedin email
         // uid is the sub (subject) from the linkedin user and also used as the uid in firebase for them
         alert(
-          `Signed into Firebase for user uid ${res.uid} with email ${res.email}`
+          `Signed into Firebase for user uid ${user.uid} with email ${user.email}`
         );
       } catch (e) {
         console.error("Error signing in: ", e);
