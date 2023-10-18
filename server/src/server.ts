@@ -2,8 +2,10 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+import { checkIfAuthenticated } from "./auth-middleware";
 import { createFirebaseCustomToken } from "./firebase-service";
 import { getAccessToken, getLinkedinUser } from "./linkedin-service";
+import "./initFirebase";
 
 const app = express();
 
@@ -31,6 +33,15 @@ app.post("/linkedin", async (req, res) => {
     console.error(e);
     res.status(500).json({ message: "Error /linkedin" });
   }
+});
+
+app.use(checkIfAuthenticated);
+
+app.get("/protected-route", (req, res) => {
+  res.status(200).json({
+    message:
+      "Success - user is authenticated in Firebase and accessed protected route",
+  });
 });
 
 const PORT = process.env.PORT || 5000;

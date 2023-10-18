@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import admin from "firebase-admin";
+import { app } from "./initFirebase";
 import { getAuth } from "firebase-admin/auth";
-
-const serviceAccount = require("../firebaseServiceAccount.json");
-
-export const app = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  projectId: process.env.FIREBASE_PROJECT_ID,
-});
 
 /**
  *

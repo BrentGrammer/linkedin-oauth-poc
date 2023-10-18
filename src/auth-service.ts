@@ -55,3 +55,12 @@ export const isSignedIn = (): boolean => {
   const auth = getAuth();
   return !!auth.currentUser;
 };
+
+export const getFirebaseUserToken = async (): Promise<string | null> => {
+  const user = getAuth().currentUser;
+  if (user) {
+    return await user.getIdToken(true);
+  } else {
+    return null;
+  }
+};
