@@ -19,3 +19,7 @@ export const createFirebaseCustomToken = async (uid: string) => {
   const customToken = await auth.createCustomToken(uid);
   return customToken;
 };
+
+export async function verifyFirebaseUserToken(idToken: string) {
+  return getAuth().verifyIdToken(idToken);
+}

@@ -1,6 +1,11 @@
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
-import { getSigninToken, signinToFirebase } from "./auth-service";
+import {
+  getFirebaseUserToken,
+  getSigninToken,
+  signinToFirebase,
+} from "./auth-service";
+import { apiClientWithAuth } from "./api";
 
 function LoginWithLinkedIn() {
   const REDIRECT_URL = `${window.location.origin}/login`; // needs to match what is entered into linkedin developer authorized urls (under the auth menu at https://www.linkedin.com/developers/apps)
@@ -14,6 +19,12 @@ function LoginWithLinkedIn() {
         // call backend to get access token and make api call to linkedin to get user info
         const firebaseCustomToken = await getSigninToken(codeFromLinkedin); // from our server where we create the firebase token.
         const user = await signinToFirebase(firebaseCustomToken);
+        const firebaseToken = await getFirebaseUserToken();
+        // create user if exists
+        await apiClientWithAuth.post("http://localhost:5000/user", {
+          token: firebaseToken,
+          user
+        });
         // we'll need to set email at some point for the firebase user using the linkedin email
         // uid is the sub (subject) from the linkedin user and also used as the uid in firebase for them
         alert(
