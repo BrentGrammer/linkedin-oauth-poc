@@ -9,10 +9,10 @@ function LoginWithLinkedIn() {
   const { linkedInLogin } = useLinkedIn({
     clientId: CLIENT_ID,
     redirectUri: encodeURIComponent(REDIRECT_URL),
-    onSuccess: async (code) => {
+    onSuccess: async (codeFromLinkedin) => {
       try {
         // call backend to get access token and make api call to linkedin to get user info
-        const firebaseCustomToken = await getSigninToken(code); // from our server where we create the firebase token.
+        const firebaseCustomToken = await getSigninToken(codeFromLinkedin); // from our server where we create the firebase token.
         const user = await signinToFirebase(firebaseCustomToken);
         // we'll need to set email at some point for the firebase user using the linkedin email
         // uid is the sub (subject) from the linkedin user and also used as the uid in firebase for them
