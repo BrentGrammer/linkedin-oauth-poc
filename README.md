@@ -16,7 +16,7 @@ This is a repo to test out signing in with linkedin from a React app and then in
 
 - Need to get access token from a server, not a browser to get around this.
 
-## Starting the app
+## Pre-requisites
 
 - requires firebase project if hooking up to firebase, update the config/firebase.ts params with your project details
 - requires a Linkedin developer app setup: https://www.linkedin.com/developers/apps
@@ -37,6 +37,8 @@ LINKEDIN_CLIENT_ID=your-client-id
 LINKEDIN_SECRET=your-secret
 REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
 ```
+## Starting the app
+
 
 - Install frontend dependencies: `npm i`
 - Install server dependencies: `cd server` `npm i`
