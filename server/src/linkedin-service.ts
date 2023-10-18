@@ -30,7 +30,7 @@ export const getAccessToken = async (code) => {
 
 export const getLinkedinUser = async ({ token_type, access_token }) => {
   const LINKEDIN_BASE_URL = "https://api.linkedin.com/v2";
-  const authorizedUserInfoEndpoint = "userinfo";
+  const authorizedUserInfoEndpoint = "userinfo"; // if we want to access user data need to add endpoints we're interested in using to the Linkedin developer app.
 
   const res = await axios.get(
     `${LINKEDIN_BASE_URL}/${authorizedUserInfoEndpoint}`,
