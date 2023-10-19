@@ -23,7 +23,7 @@ function LoginWithLinkedIn() {
         const user = await signinToFirebase(customToken);
         // After the user is signed in, we can pull and send an id token on all requests which can be verified for protected routes with Firebase library on the backend. Note: admin SDK does not support signing in on the server.
         const userSessionToken = await getFirebaseUserToken();
-        // create user if exists
+        // create user if they don't exist
         await apiClientWithAuth.post("http://localhost:5000/user", {
           token: userSessionToken,
           user,
