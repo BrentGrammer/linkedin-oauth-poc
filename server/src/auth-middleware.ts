@@ -4,25 +4,21 @@ import { db } from "./initFirebase";
 export const checkIfAuthenticated = async (req, res, next) => {
   req.user = {};
 
-  let idToken;
-
-  const UNAUTHORIZED_MESSAGE =
-    "Unauthorized: Please login or pass a valid token";
   const UNAUTHORIZED_RESPONSE = {
-    message: UNAUTHORIZED_MESSAGE,
+    message: "Unauthorized: Please login or pass a valid token",
     success: false,
     error:
       "No Firebase ID token was passed as a Bearer token in the Authorization header.",
   };
-  const UNAUTHORIZED_STATUS = 403;
 
+  let idToken;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer ")
   ) {
     idToken = req.headers.authorization.split("Bearer ")[1];
   } else {
-    return res.status(UNAUTHORIZED_STATUS).send(UNAUTHORIZED_RESPONSE);
+    return res.status(403).send(UNAUTHORIZED_RESPONSE);
   }
 
   try {
@@ -44,6 +40,6 @@ export const checkIfAuthenticated = async (req, res, next) => {
   } catch (error) {
     console.log(error, "ERR");
     UNAUTHORIZED_RESPONSE.error = error;
-    return res.status(UNAUTHORIZED_STATUS).send(UNAUTHORIZED_RESPONSE);
+    return res.status(403).send(UNAUTHORIZED_RESPONSE);
   }
 };
