@@ -6,7 +6,9 @@ import { getAuth, signInWithCustomToken } from "firebase/auth";
  * @param codeFromLinkedin code received from Linkedin after initiating oauth signin
  * @returns custom firebase token created on the backend using firebase-admin
  */
-export const getSigninToken = async (codeFromLinkedin: string): Promise<string> => {
+export const getCustomFirebaseToken = async (
+  codeFromLinkedin: string
+): Promise<string> => {
   const res = await axios.post("http://localhost:5000/linkedin", {
     code: codeFromLinkedin,
   });
