@@ -16,11 +16,12 @@ function LoginWithLinkedIn() {
     redirectUri: encodeURIComponent(REDIRECT_URL),
     onSuccess: async (codeFromLinkedin) => {
       try {
-        // call backend to get access token and make api call to linkedin to get user info
-        const customToken = await getCustomFirebaseToken(
-          codeFromLinkedin
-        ); // from our server where we create the firebase token.
+        // call a route on our server to get a linkedin api access token using the code.
+        // Then, we use linkedin user info to make a custom firebase token which is sent back in the response to sign in user with Firebase.
+        const customToken = await getCustomFirebaseToken(codeFromLinkedin);
+        // Use the custom firebase token to sign in the user with Firebase Auth
         const user = await signinToFirebase(customToken);
+        // After the user is signed in, we can pull and send an id token on all requests which can be verified for protected routes with Firebase library on the backend. Note: admin SDK does not support signing in on the server.
         const userSessionToken = await getFirebaseUserToken();
         // create user if exists
         await apiClientWithAuth.post("http://localhost:5000/user", {
