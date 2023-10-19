@@ -19,6 +19,7 @@ This is a repo to test out signing in with linkedin from a React app and then in
 ## Pre-requisites
 
 - requires firebase project if hooking up to firebase, update the config/firebase.ts params with your project details
+  - After creating your firebase project, update the `/config/firebase.ts` initialization object with your project details.
 - requires a Linkedin developer app setup: https://www.linkedin.com/developers/apps
 - requires a Service Account Credentials JSON file for your Firebase project: Firebase console > Project settings > Service Accounts tab > "Generate a new Private Key" button - save the downloaded JSON file to the project in the `/server` folder and rename it to `firebaseServiceAccount.json`
 - Populate .env files for the frontend and server (in /server) using your Linkedin/Firebase credentials:
@@ -37,8 +38,8 @@ LINKEDIN_CLIENT_ID=your-client-id
 LINKEDIN_SECRET=your-secret
 REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
 ```
-## Starting the app
 
+## Starting the app
 
 - Install frontend dependencies: `npm i`
 - Install server dependencies: `cd server` `npm i`
@@ -53,6 +54,7 @@ REDIRECT_URI=redirect-url-added-to-linkedin-developers-app-auth
   - If we are running in a google cloud function or managed env, we don't need service account: "credentials lookup is fully automated in Google environments, with no need to supply environment variables or other configuration, this way of initializing the SDK is strongly recommended for applications running in Google environments such as Cloud Run, App Engine, and Cloud Functions."
 
 ### Easier integration if app is in Google managed environment (Cloud Run, App Engine or Cloud Functions)
+
 - [see docs](https://firebase.google.com/docs/auth/admin/create-custom-tokens) If your code is deployed in the App Engine standard environment for Java, Python or Go, the Admin SDK can use the App Identity service present in that environment to sign custom tokens. The App Identity service signs data using a service account provisioned for your app by Google App Engine.
 
 If your code is deployed in some other managed environment (e.g. Google Cloud Functions, Google Compute Engine), the Firebase Admin SDK can auto-discover a service account ID string from the local metadata server. The discovered service account ID is then used in conjunction with the IAM service to sign tokens remotely.
@@ -80,13 +82,16 @@ Just like with explicitly specified service account IDs, auto-discoverd service 
 - On the backend can decode and verify custom tokens: https://firebase.google.com/docs/auth/admin/verify-id-tokens
 
 ### Signing out
+
 - Should be able to sign out of firebase no problem, but Linkedin might have issues: see https://community.auth0.com/t/i-cant-really-logout-of-my-linkedin-account-via-auth0/16941/5
 - Linkedin does not provide a way of requesting a logout and send the user back to the requestor (i.e. your application).
 - Is possible to redirect to logout url for linkedin, but not a good user experience: https://stackoverflow.com/questions/58968159/how-do-i-clear-a-session-or-logout-using-the-linkedin-rest-api
-- BEWARE using  https://www.linkedin.com/oauth/v2/revoke - this will delete the app from the developers console if the owner runs this command! https://stackoverflow.com/questions/54315667/linkedin-oauth2-0-invalidate-session-force-re-authorization
+- BEWARE using https://www.linkedin.com/oauth/v2/revoke - this will delete the app from the developers console if the owner runs this command! https://stackoverflow.com/questions/54315667/linkedin-oauth2-0-invalidate-session-force-re-authorization
 
 ### Questions:
+
 - How does token expiration/refresh tokens work for Linkedin and/or Firebase? do we need to manage sessions differently using the custom token signin/signout?
 
 ### Other Resources to check
+
 - Importing users without passwords? https://firebase.google.com/docs/auth/admin/import-users#import_users_without_passwords

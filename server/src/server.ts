@@ -43,6 +43,7 @@ app.use(checkIfAuthenticated);
 
 app.post("/user", async (req, res) => {
   try {
+    // TODO: add check to create user only if needed
     console.log("decoded user = ", req.user);
     // const name = getNames(req.user.name);
     // TODO: need to pass name from linkedin user;
