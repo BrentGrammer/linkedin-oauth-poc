@@ -17,7 +17,7 @@ function LoginWithLinkedIn() {
     onSuccess: async (codeFromLinkedin) => {
       try {
         // call a route on our server to get a linkedin api access token using the code.
-        // Then, we use linkedin user info to make a custom firebase token which is sent back in the response to sign in user with Firebase.
+        // Then, we use linkedin user info to make a custom firebase token which is sent back in the response which we use to sign the user in with Firebase auth.
         const customToken = await getCustomFirebaseToken(codeFromLinkedin);
         // Use the custom firebase token to sign in the user with Firebase Auth
         const user = await signinToFirebase(customToken);
