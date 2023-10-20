@@ -88,6 +88,11 @@ Just like with explicitly specified service account IDs, auto-discoverd service 
 - Is possible to redirect to logout url for linkedin, but not a good user experience: https://stackoverflow.com/questions/58968159/how-do-i-clear-a-session-or-logout-using-the-linkedin-rest-api
 - BEWARE using https://www.linkedin.com/oauth/v2/revoke - this will delete the app from the developers console if the owner runs this command! https://stackoverflow.com/questions/54315667/linkedin-oauth2-0-invalidate-session-force-re-authorization
 
+
+### Managing auth users
+- https://firebase.google.com/docs/auth/admin/manage-users
+  - use createUser or updateUser to set the identifier and properties like photoURL etc on a firebase auth user.
+
 ### Questions:
 
 - How does token expiration/refresh tokens work for Linkedin and/or Firebase? do we need to manage sessions differently using the custom token signin/signout?
